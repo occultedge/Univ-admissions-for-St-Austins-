@@ -317,7 +317,7 @@
           form.reset();
           document.getElementById('university').innerHTML = '<option value="" disabled selected>Select a university</option>';
         } else {
-          messageDiv.textContent = "Form submission failed. Please try again.";
+          messageDiv.textContent = `Form submission failed: ${result.message}`;
           messageDiv.classList.add("error");
         }
       } catch (error) {
