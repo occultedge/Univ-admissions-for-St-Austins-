@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Enrollment Form</title>
+</head>
+<body>
+  <h2>Course Enrollment Form</h2>
+  <form id="enrollmentForm">
+    <!-- Personal Information -->
+    <label>Full Name (As per 10th marksheet):</label><input type="text" name="fullName" required><br>
+    <label>Date of Birth:</label><input type="date" name="dob" required><br>
+    <label>Email:</label><input type="email" name="email" required><br>
+    <label>Phone Number:</label><input type="tel" name="phone" required><br>
+    <label>Father's Name:</label><input type="text" name="fatherName" required><br>
+    
+    <!-- Course and University Information -->
+    <label>University:</label>
+    <select name="university" required>
+      <option value="Jain University - B Com - Accounting & Finance">Jain University - B Com - Accounting & Finance</option>
+      <option value="D.Y PATIL University">D.Y PATIL University - MBA</option>
+    </select><br>
+    <label>Program:</label><input type="text" name="program" required><br>
+    <label>Specialization:</label><input type="text" name="specialization"><br>
+    <label>City:</label><input type="text" name="city" required><br>
+    <label>State:</label><input type="text" name="state" required><br>
+
+    <!-- Document Upload -->
+    <label>Class X Certificate:</label><input type="file" name="classX" accept=".pdf, .jpg, .png"><br>
+    <label>Class XII Certificate:</label><input type="file" name="classXII" accept=".pdf, .jpg, .png"><br>
+    <label>Undergraduate Certificate:</label><input type="file" name="ugCert" accept=".pdf, .jpg, .png"><br>
+    <label>Postgraduate Certificate:</label><input type="file" name="pgCert" accept=".pdf, .jpg, .png"><br>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <script>
+    async function submitForm() {
+      const form = document.getElementById("enrollmentForm");
+      const formData = new FormData(form);
+
+      // Encode files for Google Apps Script
+      const files = [];
+      for (let fileInput of ["classX", "classXII", "ugCert", "pgCert"]) {
+        const file = formData.get(fileInput);
+        if (file) {
+          const reader = await new Promise((resolve) => {
+            const fileReader = new FileReader();
+            fileReader.onload = () => resolve(fileReader);
+            fileReader.readAsDataURL(file);
+          });
+          const base64Data = reader.result.split(",")[1];
+          files.push({ name: file.name, data: base64Data, mimeType: file.type });
+        }
+      }
+
+      const payload = {
+        fullName: formData.get("fullName"),
+        dob: formData.get("dob"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        fatherName: formData.get("fatherName"),
+        university: formData.get("university"),
+        program: formData.get("program"),
+        specialization: formData.get("specialization"),
+        city: formData.get("city"),
+        state: formData.get("state"),
+        files: files
+      };
+
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwcbtTXOWfpRzc7Jm7Mc8DvC48XgWc8kNJtJrhv4Mg4-dh-Z6BSMj95yAqJbiUqUXt_/exec", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        if (result.status === "success") {
+          alert("Form submitted successfully!");
+        } else {
+          alert("Form submission failed.");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("Form submission failed.");
+      }
+    }
+  </script>
+</body>
+</html>
