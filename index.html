@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Course Enrollment Form</title>
+  <title>University Admissions Form</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Reset some default styles */
+    /* Reset default styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,9 +13,8 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f2f5;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
       padding: 20px;
     }
 
@@ -26,86 +25,58 @@
     }
 
     form {
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 800px;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      max-width: 600px;
       margin: 0 auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
-    .form-group label {
-      margin-bottom: 8px;
+    label {
+      display: block;
+      margin-bottom: 5px;
       font-weight: bold;
       color: #34495e;
     }
 
-    .form-group input,
-    .form-group select {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      border-color: #3498db;
-      outline: none;
-    }
-
-    .file-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-    }
-
-    .file-group label {
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #34495e;
-    }
-
-    .file-group input {
-      padding: 8px 0;
-    }
-
-    .submit-btn {
-      background-color: #3498db;
-      color: white;
-      padding: 15px 25px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background-color 0.3s;
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
       width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
     }
 
-    .submit-btn:hover {
+    input[type="file"] {
+      padding: 5px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
       background-color: #2980b9;
     }
 
-    /* Responsive Design */
-    @media (max-width: 600px) {
-      form {
-        padding: 20px;
-      }
-    }
-
-    /* Dropdown dependent styles */
-    .hidden {
-      display: none;
-    }
-
-    /* Success and Error Messages */
     .message {
       text-align: center;
       margin-top: 20px;
@@ -119,12 +90,19 @@
     .error {
       color: #e74c3c;
     }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h2>Course Enrollment Form</h2>
-  <form id="enrollmentForm">
+  <h2>University Admissions Form</h2>
+  <form id="admissionForm">
     <!-- Personal Information -->
     <div class="form-group">
       <label for="fullName">Full Name (As per 10th Marksheet):</label>
@@ -153,20 +131,12 @@
 
     <!-- Course and University Information -->
     <div class="form-group">
-      <label for="course">Select Course:</label>
-      <select id="course" name="course" required>
-        <option value="" disabled selected>Select a course</option>
-        <option value="B.Com">B.Com</option>
-        <option value="MBA">MBA</option>
-        <!-- Add more courses as needed -->
-      </select>
-    </div>
-
-    <div class="form-group">
       <label for="university">Select University:</label>
       <select id="university" name="university" required>
         <option value="" disabled selected>Select a university</option>
-        <!-- Options will be populated based on selected course -->
+        <option value="Jain University - B Com - Accounting & Finance">Jain University - B Com - Accounting & Finance</option>
+        <option value="D.Y PATIL University - MBA">D.Y PATIL University - MBA</option>
+        <!-- Add more universities as needed -->
       </select>
     </div>
 
@@ -190,142 +160,90 @@
       <input type="text" id="state" name="state" required>
     </div>
 
-    <!-- Document Upload -->
-    <div class="file-group">
-      <label for="classX">Class X Certificate:</label>
-      <input type="file" id="classX" name="classX" accept=".pdf, .jpg, .jpeg, .png" required>
+    <!-- PDF Upload -->
+    <div class="form-group">
+      <label for="pdfFile">Upload Certificates (All in one PDF):</label>
+      <input type="file" id="pdfFile" name="pdfFile" accept="application/pdf" required>
     </div>
 
-    <div class="file-group">
-      <label for="classXII">Class XII Certificate:</label>
-      <input type="file" id="classXII" name="classXII" accept=".pdf, .jpg, .jpeg, .png" required>
-    </div>
-
-    <div class="file-group">
-      <label for="ugCert">Undergraduate Certificate:</label>
-      <input type="file" id="ugCert" name="ugCert" accept=".pdf, .jpg, .jpeg, .png">
-    </div>
-
-    <div class="file-group">
-      <label for="pgCert">Postgraduate Certificate:</label>
-      <input type="file" id="pgCert" name="pgCert" accept=".pdf, .jpg, .jpeg, .png">
-    </div>
-
-    <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+    <button type="button" onclick="submitForm()">Submit</button>
   </form>
 
   <div id="message" class="message"></div>
 
   <script>
-    // Mapping courses to their respective universities
-    const courseUniversityMap = {
-      "B.Com": [
-        "Jain University - B Com - Accounting & Finance"
-        // Add more B.Com universities if needed
-      ],
-      "MBA": [
-        "D.Y PATIL University - MBA"
-        // Add more MBA universities if needed
-      ]
-      // Add more courses and their universities as needed
-    };
-
-    // Populate universities based on selected course
-    document.getElementById('course').addEventListener('change', function() {
-      const course = this.value;
-      const universitySelect = document.getElementById('university');
-      universitySelect.innerHTML = '<option value="" disabled selected>Select a university</option>'; // Reset options
-
-      if(courseUniversityMap[course]) {
-        courseUniversityMap[course].forEach(function(univ) {
-          const option = document.createElement('option');
-          option.value = univ;
-          option.textContent = univ;
-          universitySelect.appendChild(option);
-        });
-      }
-    });
-
     async function submitForm() {
-      const form = document.getElementById("enrollmentForm");
+      const form = document.getElementById("admissionForm");
       const formData = new FormData(form);
       const messageDiv = document.getElementById("message");
       messageDiv.textContent = "";
       messageDiv.className = "message";
 
-      // Validate file uploads
-      const fileInputs = ["classX", "classXII", "ugCert", "pgCert"];
-      for (let inputName of fileInputs) {
-        const file = formData.get(inputName);
-        if (file && file.size > 0) {
-          // Optional: Add file size validation (e.g., max 5MB)
-          const maxSize = 5 * 1024 * 1024; // 5MB
-          if (file.size > maxSize) {
-            messageDiv.textContent = `Error: ${inputName} file size exceeds 5MB.`;
-            messageDiv.classList.add("error");
-            return;
-          }
-        }
+      // Validate PDF upload
+      const pdfFile = formData.get("pdfFile");
+      if (pdfFile && pdfFile.type !== "application/pdf") {
+        messageDiv.textContent = "Error: Please upload a valid PDF file.";
+        messageDiv.classList.add("error");
+        return;
       }
 
-      // Encode files for Google Apps Script
-      const files = [];
-      for (let inputName of fileInputs) {
-        const file = formData.get(inputName);
-        if (file && file.size > 0) {
-          const reader = await new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.onload = () => resolve(fileReader);
-            fileReader.onerror = () => reject(new Error("File reading failed"));
-            fileReader.readAsDataURL(file);
+      // Read the PDF file as Base64
+      const reader = new FileReader();
+      reader.readAsDataURL(pdfFile);
+      reader.onload = async () => {
+        const base64PDF = reader.result.split(",")[1];
+
+        // Prepare the payload
+        const payload = {
+          fullName: formData.get("fullName"),
+          dob: formData.get("dob"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          fatherName: formData.get("fatherName"),
+          university: formData.get("university"),
+          program: formData.get("program"),
+          specialization: formData.get("specialization"),
+          city: formData.get("city"),
+          state: formData.get("state"),
+          pdfFile: base64PDF
+        };
+
+        try {
+          // Show loading message
+          messageDiv.textContent = "Submitting...";
+          messageDiv.classList.add("message");
+
+          // Send the data to Google Apps Script
+          const response = await fetch("https://script.google.com/macros/s/AKfycbzTb2krOJYTN9KKCV8oiauAS-X8J9QaSzNBjX3h-ddLyCZQ6li0wQIjYyx4P_oIshrA/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
           });
-          const base64Data = reader.result.split(",")[1];
-          files.push({ name: file.name, data: base64Data, mimeType: file.type });
-        }
-      }
 
-      const payload = {
-        fullName: formData.get("fullName"),
-        dob: formData.get("dob"),
-        email: formData.get("email"),
-        phone: formData.get("phone"),
-        fatherName: formData.get("fatherName"),
-        university: formData.get("university"),
-        program: formData.get("program"),
-        specialization: formData.get("specialization"),
-        city: formData.get("city"),
-        state: formData.get("state"),
-        files: files
-      };
+          const result = await response.json();
 
-      try {
-        // Show loading message
-        messageDiv.textContent = "Submitting...";
-        messageDiv.classList.add("message");
+          if (result.status === "success") {
+            messageDiv.textContent = "Form submitted successfully!";
+            messageDiv.classList.add("success");
+            form.reset();
+          } else {
+            messageDiv.textContent = "Submission failed: " + result.message;
+            messageDiv.classList.add("error");
+          }
 
-        const response = await fetch("https://script.google.com/macros/s/AKfycbzWCTWVZtwzcSDigk6VGhjuwqfjmnwRqEZ8ep3R3TzUd9OKkpRjbwF8dC_2srte8JuVSg/exec", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await response.json();
-
-        if (result.status === "success") {
-          messageDiv.textContent = "Form submitted successfully!";
-          messageDiv.classList.add("success");
-          form.reset();
-          document.getElementById('university').innerHTML = '<option value="" disabled selected>Select a university</option>';
-        } else {
-          messageDiv.textContent = `Form submission failed: ${result.message}`;
+        } catch (error) {
+          console.error("Error:", error);
+          messageDiv.textContent = "An error occurred during submission.";
           messageDiv.classList.add("error");
         }
-      } catch (error) {
-        console.error("Error submitting form:", error);
-        messageDiv.textContent = "An error occurred while submitting the form. Please try again later.";
+      };
+
+      reader.onerror = () => {
+        messageDiv.textContent = "Error reading the PDF file.";
         messageDiv.classList.add("error");
-      }
+      };
     }
   </script>
+
 </body>
 </html>
